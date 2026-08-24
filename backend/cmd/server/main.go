@@ -47,6 +47,7 @@ func NewServer() *http.Server {
 	h := &handler.Server{
 		Port:          port,
 		AllowedOrigin: os.Getenv("ALLOWED_ORIGIN"),
+		StaticDir:     os.Getenv("STATIC_DIR"),
 	}
 
 	// Declare Server config

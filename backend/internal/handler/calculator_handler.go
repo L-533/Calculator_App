@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"os"
+	"path/filepath"
 
 	"Calculator_App/internal/calculator"
 )
@@ -12,6 +14,8 @@ import (
 type Server struct {
 	Port          int
 	AllowedOrigin string
+	// To use production environment, set StaticDir to the path of the built frontend assets.
+	StaticDir string
 }
 
 func (s *Server) RegisterRoutes() http.Handler {
@@ -21,8 +25,24 @@ func (s *Server) RegisterRoutes() http.Handler {
 	mux.HandleFunc("/api/v1/calculate", s.CalculateHandler)
 	mux.HandleFunc("/", s.HelloWorldHandler)
 
+	if s.StaticDir != "" {
+		mux.Handle("/", spaHandler(s.StaticDir))
+	}
+
 	// Wrap the mux with CORS middleware
 	return s.corsMiddleware(mux)
+}
+
+// spaHandler serves static assets and falls back to index.html for unknown paths.
+func spaHandler(staticDir string) http.Handler {
+	fileServer := http.FileServer(http.Dir(staticDir))
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		path := filepath.Join(staticDir, filepath.Clean(r.URL.Path))
+		if _, err := os.Stat(path); err != nil {
+			r.URL.Path = "/"
+		}
+		fileServer.ServeHTTP(w, r)
+	})
 }
 
 func (s *Server) corsMiddleware(next http.Handler) http.Handler {
