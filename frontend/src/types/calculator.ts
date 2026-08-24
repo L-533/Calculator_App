@@ -1,4 +1,4 @@
-export type Operation = 'add' | 'subtract' | 'multiply' | 'divide'
+export type Operation = 'add' | 'subtract' | 'multiply' | 'divide' | 'exponent'
 
 export type CalculateRequest = {
 	operation: Operation

@@ -1,6 +1,9 @@
 package calculator
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 type Operation string
 
@@ -9,6 +12,7 @@ const (
 	Subtract Operation = "subtract"
 	Multiply Operation = "multiply"
 	Divide   Operation = "divide"
+	Exponent Operation = "exponent"
 )
 
 type MathRequest struct {
@@ -38,6 +42,8 @@ func Calculate(operation Operation, a *float64, b *float64) (float64, error) {
 			return 0, fmt.Errorf("division by zero")
 		}
 		return *a / *b, nil
+	case Exponent:
+		return math.Pow(*a, *b), nil
 	default:
 		return 0, fmt.Errorf("unknown operation")
 	}

@@ -47,6 +47,18 @@ func TestCalculateHandler(t *testing.T) {
 			wantStatus: http.StatusBadRequest,
 		},
 		{
+			name:       "exponent",
+			body:       `{"operation":"exponent","a":2,"b":10}`,
+			wantStatus: http.StatusOK,
+			wantResult: 1024,
+		},
+		{
+			name:       "exponent negative exponent",
+			body:       `{"operation":"exponent","a":2,"b":-2}`,
+			wantStatus: http.StatusOK,
+			wantResult: 0.25,
+		},
+		{
 			name:       "unknown operation",
 			body:       `{"operation":"modulo","a":10,"b":5}`,
 			wantStatus: http.StatusBadRequest,

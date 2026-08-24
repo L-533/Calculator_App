@@ -82,7 +82,7 @@ Performs one arithmetic operation on two operands.
 
 | Field       | Type                                          | Required |
 |-------------|-----------------------------------------------|----------|
-| `operation` | `"add"` \| `"subtract"` \| `"multiply"` \| `"divide"` | yes |
+| `operation` | `"add"` \| `"subtract"` \| `"multiply"` \| `"divide"` \| `"exponent"` | yes |
 | `a`         | number                                        | yes      |
 | `b`         | number                                        | yes      |
 
@@ -107,6 +107,12 @@ curl -X POST http://localhost:8080/api/v1/calculate \
   -d '{"operation":"divide","a":10,"b":4}'
 # => {"result":2.5}
 
+# Exponent (a^b)
+curl -X POST http://localhost:8080/api/v1/calculate \
+  -H "Content-Type: application/json" \
+  -d '{"operation":"exponent","a":2,"b":10}'
+# => {"result":1024}
+
 # Division by zero -> 400 Bad Request
 curl -i -X POST http://localhost:8080/api/v1/calculate \
   -H "Content-Type: application/json" \
@@ -125,7 +131,8 @@ curl -i -X POST http://localhost:8080/api/v1/calculate \
 ## Testing
 
 **Backend** (`cd backend && go test ./...`)
-- `internal/calculator`: pure arithmetic logic — all four operations, negative
+- `internal/calculator`: pure arithmetic logic — all five operations (add,
+  subtract, multiply, divide, exponent), negative
   numbers, zero operands, division by (positive and negative) zero, unknown
   operations, missing operands, and floating-point precision using a tolerance
   comparison instead of exact equality.

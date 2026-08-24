@@ -10,6 +10,7 @@ const OPERATIONS: { value: Operation; label: string }[] = [
   { value: 'subtract', label: 'Subtraction' },
   { value: 'multiply', label: 'Multiplication' },
   { value: 'divide', label: 'Division' },
+  { value: 'exponent', label: 'Exponent' },
 ]
 
 

@@ -147,6 +147,47 @@ func TestCalculate(t *testing.T) {
 			b:         ptr(math.Copysign(0, -1)),
 			wantErr:   true,
 		},
+		{
+			name:      "exponent",
+			operation: Exponent,
+			a:         ptr(2),
+			b:         ptr(10),
+			expected:  1024,
+		},
+		{
+			name:      "exponent zero power",
+			operation: Exponent,
+			a:         ptr(5),
+			b:         ptr(0),
+			expected:  1,
+		},
+		{
+			name:      "exponent negative exponent",
+			operation: Exponent,
+			a:         ptr(2),
+			b:         ptr(-2),
+			expected:  0.25,
+		},
+		{
+			name:      "exponent negative base",
+			operation: Exponent,
+			a:         ptr(-2),
+			b:         ptr(3),
+			expected:  -8,
+		},
+		{
+			name:      "exponent zero base zero power",
+			operation: Exponent,
+			a:         ptr(0),
+			b:         ptr(0),
+			expected:  1,
+		},
+		{
+			name:      "missing a for exponent",
+			operation: Exponent,
+			b:         ptr(5),
+			wantErr:   true,
+		},
 	}
 
 	for _, tt := range tests {
@@ -182,6 +223,7 @@ func TestCalculateFloatingPointPrecision(t *testing.T) {
 		{name: "1.1 - 1.0", operation: Subtract, a: 1.1, b: 1.0, expected: 0.1},
 		{name: "0.1 * 3", operation: Multiply, a: 0.1, b: 3, expected: 0.3},
 		{name: "1 / 3", operation: Divide, a: 1, b: 3, expected: 0.3333333333333333},
+		{name: "2 ^ 0.5", operation: Exponent, a: 2, b: 0.5, expected: math.Sqrt2},
 	}
 
 	for _, tt := range tests {
