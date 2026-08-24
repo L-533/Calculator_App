@@ -5,6 +5,9 @@ A full-stack calculator application built with React/TypeScript
 and Go. The application exposes a REST API for arithmetic
 operations and provides a responsive web interface.
 
+Please visit the live demo at the link below. The application is responsive and can be accessed from both desktop and mobile devices.
+https://calculatorapp-production-132d.up.railway.app/
+
 ## Architecture
 
 The application follows a simple layered architecture:
