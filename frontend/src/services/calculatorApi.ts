@@ -14,9 +14,20 @@ export async function calculate(
 		body: JSON.stringify({ operation, a, b }),
 	})
 
-	const data = (await response.json()) as CalculateResponse & { message?: string }
+	// Handle the response and parse the JSON data
+	const text = await response.text()
+	let data: (CalculateResponse & { message?: string }) | undefined
+	try {
+		data = text ? (JSON.parse(text) as CalculateResponse & { message?: string }) : undefined
+	} catch {
+		data = undefined
+	}
+
 	if (!response.ok) {
-		throw new Error(data.message ?? 'Failed to calculate')
+		throw new Error(data?.message || text || 'Failed to calculate')
+	}
+	if (!data) {
+		throw new Error('Empty response from server')
 	}
 
 	return data.result
