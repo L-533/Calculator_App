@@ -1,0 +1,132 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 640px;
+  padding-inline: clamp(16px, 4vw, 32px);
+  margin: clamp(24px, 8vh, 72px) auto 0;
+  box-sizing: border-box;
+
+}
+
+@media (max-width: 480px) {
+  .calculator-title {
+    font-size: 28px;
+  }
+
+  .field input,
+  .field select,
+  .calculate-btn {
+    font-size: 15px;
+  }
+}
+
+.calculator-card {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 420px);
+  max-width: 100%;
+  padding: clamp(20px, 4vw, 32px);
+  border-radius: 12px;
+  border: 1px solid var(--border, #848484);
+  background: var(--accent-bg, rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(2px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.calculator-title {
+  margin: 0 0 20px;
+  text-align: center;
+  font-size: 32px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.field label {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.field input{
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border, #848484);
+  background: transparent;
+  color: rgb(215, 215, 23);
+  font-size: 16px;
+}
+
+.field input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  opacity: 1;
+}
+
+.field select {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border, #848484);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+}
+
+.field select,
+::picker(select) {
+  appearance: base-select;
+}
+
+.field select option {
+  color: #000;
+  background: #ffffffee;
+}
+
+.field select option:nth-of-type(odd) {
+  background: rgb(208, 207, 207);
+}
+
+.field select option:hover {
+  background-color: #646cff !important;
+}
+
+.calculate-btn {
+  margin-top: 8px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  background: var(--accent, #3d46f4);
+  border: 1px outset var(--border, #848484);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.calculate-btn:hover {
+  transition: 0;
+  background: var(--accent, #646cff);
+}
+
+.calculator-error {
+  margin-top: 25px;
+  color: tomato;
+  text-align: center;
+  font-size: 18px;
+}
+
+.calculator-result {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 520;
+}
+
+.result-value {
+  color: rgb(215, 215, 23);
+}
