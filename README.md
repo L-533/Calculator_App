@@ -1,4 +1,5 @@
-:computer: # Sezzle Full-Stack Calculator
+## Sezzle Full-Stack Calculator :computer: 
+
 
 A full-stack calculator application built with React/TypeScript
 and Go. The application exposes a REST API for arithmetic
