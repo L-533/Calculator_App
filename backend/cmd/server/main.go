@@ -1,14 +1,17 @@
 package main
 
 import (
-	server "Calculator_App/internal"
 	"context"
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"os/signal"
+	"strconv"
 	"syscall"
 	"time"
+
+	handler "Calculator_App/internal/handler"
 )
 
 func gracefulShutdown(apiServer *http.Server, done chan bool) {
@@ -36,9 +39,33 @@ func gracefulShutdown(apiServer *http.Server, done chan bool) {
 	done <- true
 }
 
+func NewServer() *http.Server {
+	port, err := strconv.Atoi(os.Getenv("PORT"))
+	if err != nil || port == 0 {
+		port = 8080
+	}
+	h := &handler.Server{
+		Port:          port,
+		AllowedOrigin: os.Getenv("ALLOWED_ORIGIN"),
+	}
+
+	// Declare Server config
+	server := &http.Server{
+		Addr:         fmt.Sprintf(":%d", h.Port),
+		Handler:      h.RegisterRoutes(),
+		IdleTimeout:  time.Minute,
+		ReadTimeout:  10 * time.Second,
+		WriteTimeout: 30 * time.Second,
+	}
+
+	log.Printf("Server listening on %s", server.Addr)
+
+	return server
+}
+
 func main() {
 
-	server := server.NewServer()
+	server := NewServer()
 
 	log.Printf("listening on %s", server.Addr)
 
