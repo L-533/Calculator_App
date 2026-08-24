@@ -1,4 +1,5 @@
-# Sezzle Full-Stack Calculator
+## Sezzle Full-Stack Calculator :computer: 
+
 
 A full-stack calculator application built with React/TypeScript
 and Go. The application exposes a REST API for arithmetic
@@ -8,13 +9,7 @@ operations and provides a responsive web interface.
 
 The application follows a simple layered architecture:
 
-React UI
-    ↓
-REST API
-    ↓
-HTTP Handler
-    ↓
-Calculator Service
+React UI > REST API > HTTP Handler > Calculator Service
 
 The calculator logic is kept independent from HTTP concerns,
 which allows the core functionality to be unit tested without
