@@ -1,12 +1,14 @@
-## Sezzle Full-Stack Calculator :computer: 
+## Full-Stack Calculator :computer: 
 
 
 A full-stack calculator application built with React/TypeScript
 and Go. The application exposes a REST API for arithmetic
 operations and provides a responsive web interface.
 
-Please visit the live demo at the link below. The application is responsive and can be accessed from both desktop and mobile devices.
-https://calculatorapp-production-132d.up.railway.app/
+The application is responsive and can be accessed from both desktop and mobile devices.
+
+Index: <img width="1917" height="907" alt="image" src="https://github.com/user-attachments/assets/049cd8fd-07a0-4209-b1dc-f3b13a0a0c8d" />
+
 
 ## Architecture
 
